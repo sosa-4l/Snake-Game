@@ -1,9 +1,9 @@
 from tkinter import *
 import random
 
-GAME_WIDTH = 500
-GAME_HEIGHT = 250
-SPEED = 65
+GAME_WIDTH = 700
+GAME_HEIGHT = 500
+speed = 70
 SPACE_SIZE = 25
 BODY_PARTS = 4
 SNAKE_COLOR = "#FF0000"
@@ -37,6 +37,7 @@ class Snake:
 
 
 def new_turn(snake, food):
+    global speed
     x,y = snake.coordinates[0]
     global score
     
@@ -56,6 +57,7 @@ def new_turn(snake, food):
     if x == food.x and y == food.y:
         score += 1
         label.config(text="Score:{}".format(score))
+        speed += 1
          
         canvas.delete(food.pic)
         food = Food()
@@ -67,7 +69,7 @@ def new_turn(snake, food):
     if check_collision(snake):
         endgame()
         
-    window.after(SPEED, new_turn, snake, food)
+    window.after(speed, new_turn, snake, food)
 
 def change_dir(new_dir):
     global direction
